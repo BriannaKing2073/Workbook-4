@@ -17,13 +17,11 @@ public class Employee {
     private double punchOut;
 
     //Constructors
-    public Employee(String name, int employeeId, String department, double payRate, double regularHours, double overTimeHours, double totalPay, double punchIn, double punchOut) {
+    public Employee(String name, int employeeId, String department, double payRate, double totalPay, double punchIn, double punchOut) {
         this.name = name;
         this.employeeId = employeeId;
         this.department = department;
         this.payRate = payRate;
-        this.regularHours = regularHours;
-        this.overTimeHours = overTimeHours;
         this.totalPay = totalPay;
         this.punchIn = punchIn;
         this.punchOut = punchOut;
@@ -71,24 +69,35 @@ public class Employee {
         this.hoursWorked = hoursWorked;
     }
 
-    public double getRegularHours() {
-        return regularHours;
+    public float getRegularHours() {
+        if (hoursWorked > 40){
+            return 40;
+        }
+        else {
+            return hoursWorked;
+        }
     }
 
-    public void setRegularHours(double regularHours) {
+    public void setRegularHours(float regularHours) {
         this.regularHours = regularHours;
     }
 
-    public double getOverTimeHours() {
-        return overTimeHours;
+    public float getOverTimeHours() {
+        if (hoursWorked > 40){
+            return hoursWorked - 40;
+        }
+        else {
+            return 0;
+        }
+//        return (hoursWorked > 40)? hoursWorked - 40 : 0; (does the same thing as code above)
     }
 
-    public void setOverTimeHours(double overTimeHours) {
+    public void setOverTimeHours(float overTimeHours) {
         this.overTimeHours = overTimeHours;
     }
 
     public double getTotalPay() {
-        return totalPay;
+        return (getRegularHours() * payRate) + (getOverTimeHours() * payRate * 1.5);
     }
 
     public void setTotalPay(double totalPay) {

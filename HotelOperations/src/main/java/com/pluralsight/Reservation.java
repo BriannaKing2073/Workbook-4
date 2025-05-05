@@ -29,11 +29,14 @@ public class Reservation {
     }
 
     public double getPrice() {
-        double basePrice;
+        double basePrice = 0;
         if (roomType.equalsIgnoreCase("King")){
            basePrice = 139;
         } else if (roomType.equalsIgnoreCase("Double")) {
             basePrice = 124;
+        }
+        if (this.isWeekend){
+            basePrice *= 1.10;
         }
      return basePrice;
     }
